@@ -6,17 +6,17 @@ public abstract class Character_Move
     public bool canMove = true;
 
     [Header("Movement Variables")]
-    [SerializeField] public float movementSpeed = 1f;
+    [SerializeField] public float movementSpeed;
     [SerializeField] protected float PERCENTAGE_INCREASE_WHEN_SPRINTING = 10f;
 
     protected Rigidbody2D rigidbody;
-    protected Collider2D collider;
     protected SpriteRenderer spriteRenderer;
 
-    public Character_Move(Rigidbody2D rigidbody, Collider2D collider, SpriteRenderer spriteRenderer)
+    public Character_Move(Rigidbody2D rigidbody, SpriteRenderer spriteRenderer, float speed = 1f)
     {
+        movementSpeed = speed;
+
         this.rigidbody = rigidbody;
-        this.collider = collider;
         this.spriteRenderer = spriteRenderer;
     }
 
@@ -50,8 +50,8 @@ public abstract class Character_Move
         }
 
         //Moving the Character
-        movement = new Vector2(movementDirection.x, movementDirection.y) * Time.deltaTime * speed;
-        collider.transform.Translate(movement, Space.World);
+        movement = new Vector2(movementDirection.x, movementDirection.y) * Time.fixedDeltaTime * speed;
+        rigidbody.transform.Translate(movement, Space.World);
     }
     #endregion
 }

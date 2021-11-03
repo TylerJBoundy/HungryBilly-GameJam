@@ -10,6 +10,9 @@ public class Player_Input
     private bool isSprinting = false;
     public bool IsSprinting => isSprinting;
 
+    private bool absorbingLife = false;
+    public bool AbsorbingLife => absorbingLife;
+
     public Player_Input()
     {
         controls = new PlayerControls();
@@ -20,6 +23,9 @@ public class Player_Input
 
         controls.Player.Sprint.performed += ctx => isSprinting = true;
         controls.Player.Sprint.canceled += ctx => isSprinting = false;
+
+        controls.Player.AbsorbLife.performed += ctx => absorbingLife = true;
+        controls.Player.AbsorbLife.canceled += ctx => absorbingLife = false;
     }
 
     #region Unity new input system (OnEnable/OnDisable)

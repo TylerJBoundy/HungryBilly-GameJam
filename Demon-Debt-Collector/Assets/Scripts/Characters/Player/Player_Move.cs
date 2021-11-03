@@ -4,6 +4,6 @@ using UnityEngine;
 public class Player_Move : Character_Move
 {
 
-    public Player_Move(Rigidbody2D rigidbody, Collider2D collider, SpriteRenderer spriteRenderer) : base(rigidbody, collider, spriteRenderer) { }
+    public Player_Move(float speed, Rigidbody2D rigidbody, SpriteRenderer spriteRenderer) : base(rigidbody, spriteRenderer, speed) { }
 
 }

@@ -18,6 +18,7 @@ public class Player_Input
         controls = new PlayerControls();
         OnEnable();
 
+        //Regestering actions to behaviour. (i.e. wasd to move the character)
         controls.Player.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => move = Vector2.zero;
 

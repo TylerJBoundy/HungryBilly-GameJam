@@ -7,7 +7,7 @@ public class Player_Move : Character_Move
 
     public Player_Move(float speed, Rigidbody2D rigidbody, SpriteRenderer spriteRenderer, Animator animator) : base(rigidbody, spriteRenderer, speed) { this.animator = animator; }
 
-    public override void Move(Vector2 movementDirection, bool sprinting = false)
+    public override void Move(Vector2 movementDirection, bool sprinting = false) //handles further movement behaviour
     {
         base.Move(movementDirection, sprinting);
 

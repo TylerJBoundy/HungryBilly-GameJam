@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -17,11 +15,12 @@ public class CameraFollow : MonoBehaviour
 
     public Transform Target => target;
 
+    //Used in edittor for better camera positioning settings.
     private void OnValidate() => transform.position = new Vector3(transform.position.x, transform.position.y, zoom);
 
     private void Update()
     {
-        if (target != null)
+        if (target != null) // if the target exists, set camera position relative to variables.
         {
             Vector3 targetPosition = target.TransformPoint(new Vector3(0, 0, zoom));
             Vector3 desiredPosition = transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);

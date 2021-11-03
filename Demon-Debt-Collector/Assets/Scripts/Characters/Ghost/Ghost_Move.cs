@@ -7,7 +7,7 @@ public class Ghost_Move : Character_Move
     public Ghost_Move(float speed, Rigidbody2D rigidbody, SpriteRenderer spriteRenderer) : base(rigidbody, spriteRenderer, speed) { }
 
 
-    public override void Move(Vector2 movementDirection, bool sprinting = false)
+    public override void Move(Vector2 movementDirection, bool sprinting = false) //handles ghost movement. new code compared to character_move
     {
         if (!canMove) return;
 

@@ -37,6 +37,9 @@ public class LevelLoader : MonoBehaviour
         LoadLevel();
     }
 
+    /// <summary>
+    /// Generates a Map from a png relative to it's pixels, using the tile array above.
+    /// </summary>
     private void LoadLevel()
     {
         tileColours = new Color[levelWidth * levelHeight];

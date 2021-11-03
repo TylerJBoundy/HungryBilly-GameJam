@@ -40,7 +40,7 @@ public class Ghost : Enemy
     }
     #endregion
 
-    public override void Dead()
+    public override void Dead() //handles further death behaviour for the ghost character
     {
         gm.GhostDrained(reward);
         base.Dead();

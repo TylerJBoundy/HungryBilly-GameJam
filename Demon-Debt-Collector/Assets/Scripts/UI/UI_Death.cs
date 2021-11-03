@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -23,8 +21,14 @@ public class UI_Death : MonoBehaviour
         player.Life.OnDied.AddListener(ShowDeathScreen);
     }
 
+    /// <summary>
+    /// Reloads the current scene ("respawning" the player).
+    /// </summary>
     public void Respawn() => SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
 
+    /// <summary>
+    /// Shows the death screen alongside the end of game stats window.
+    /// </summary>
     private void ShowDeathScreen()
     {
         if (player.IsInvinsible) return;
@@ -33,8 +37,14 @@ public class UI_Death : MonoBehaviour
         UpdateVisuals();
     }
 
+    /// <summary>
+    /// Hides the death screen.
+    /// </summary>
     private void HideDeathScreen() => deathScreen.alpha = 0;
 
+    /// <summary>
+    /// Updates the stats visuals.
+    /// </summary>
     private void UpdateVisuals()
     {
         scoreText.text = $"Score: {gm.Score}";

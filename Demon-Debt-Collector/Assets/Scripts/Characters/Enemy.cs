@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour //handles basic enemy functions and variables
 {
     [Header("Rewards")]
     [SerializeField] protected KillReward reward;

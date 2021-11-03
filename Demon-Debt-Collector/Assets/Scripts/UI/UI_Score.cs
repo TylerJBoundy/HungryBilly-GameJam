@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UI_Score : MonoBehaviour
@@ -14,5 +12,8 @@ public class UI_Score : MonoBehaviour
         gm.OnScoreUpdated.AddListener(UpdateVisuals);
     }
 
+    /// <summary>
+    /// Updates the score visuals.
+    /// </summary>
     private void UpdateVisuals() => scoreText.text = $"Score: {gm.Score}";
 }

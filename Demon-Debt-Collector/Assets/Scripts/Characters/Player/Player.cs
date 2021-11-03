@@ -54,6 +54,9 @@ public class Player : MonoBehaviour
         if (input.AbsorbingLife && target != null && busy == false) absorbLife.StartAbsorb(target);
     }
 
+    /// <summary>
+    /// Fired when player dies.
+    /// </summary>
     private void Dead()
     {
         if (invinsible) return;

@@ -28,7 +28,11 @@ public class AbsorbLife : MonoBehaviour
         if (player == null) player = FindObjectOfType<Player>();
     }
 
-
+    /// <summary>
+    /// Checks the enemy for it's Type.
+    /// </summary>
+    /// <param name="enemy">The enemy to check.</param>
+    /// <returns>The EnemyType relative to enemy.</returns>
     private EnemyTypes CheckEnemyType(Enemy enemy)
     {
         if (enemy as Ghost != null)

@@ -4,7 +4,7 @@ public class TileSortingOrder : MonoBehaviour
 {
     private Player player;
     private SpriteRenderer spriteRenderer;
-    private int Mode;
+    private int mode = 0;
 
     [SerializeField] private int orderOffset = 1;
 
@@ -12,24 +12,23 @@ public class TileSortingOrder : MonoBehaviour
     {
         if (player == null) player = FindObjectOfType<Player>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
-        Mode = 0;
     }
 
     void Update()
     {
         if (player.transform.position.y > transform.position.y)
         {
-            if (Mode == 1 || Mode == 0)
+            if (mode == 1 || mode == 0)
             {
-                Mode = 2;
+                mode = 2;
                 spriteRenderer.sortingOrder = player.GetComponent<SpriteRenderer>().sortingOrder + orderOffset;
             }
         }
         else if (player.transform.position.y <= transform.position.y)
         {
-            if (Mode == 2 || Mode == 0)
+            if (mode == 2 || mode == 0)
             {
-                Mode = 1;
+                mode = 1;
                 spriteRenderer.sortingOrder = player.GetComponent<SpriteRenderer>().sortingOrder - orderOffset;
             }
         }

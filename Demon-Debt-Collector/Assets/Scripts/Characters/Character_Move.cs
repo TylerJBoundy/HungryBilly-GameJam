@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [System.Serializable]
-public abstract class Character_Move
+public abstract class Character_Move //handles movement for characters.
 {
     public bool canMove = true;
 

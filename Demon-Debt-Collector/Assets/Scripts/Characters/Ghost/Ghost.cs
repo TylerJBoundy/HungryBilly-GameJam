@@ -20,7 +20,10 @@ public class Ghost : MonoBehaviour
 
     private void Update()
     {
-        movement.Move(destinations[targetIndex].position);
-        if (transform.position == destinations[targetIndex].position) GetNewTarget();
+        if (destinations.Length != 0)
+        {
+            movement.Move(destinations[targetIndex].position);
+            if (transform.position == destinations[targetIndex].position) GetNewTarget();
+        }
     }
 }

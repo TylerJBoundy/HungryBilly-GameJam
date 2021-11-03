@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lifeforce : MonoBehaviour
+[System.Serializable]
+public class Lifeforce
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Health")]
+    [SerializeField] private float life = 10;
+    [SerializeField] private float maxLife = 10;
 
-    // Update is called once per frame
-    void Update()
+    public float Life => life;
+    public float MaxLife => maxLife;
+
+    [Header("Customisable Variables")]
+    [Tooltip("The time it takes your life bar to drain completely in seconds.")]
+    [SerializeField] private float lifeDrainDuration;
+
+    private bool draining = false;
+    public bool Draining => draining;
+
+    public IEnumerator DrainLife()
     {
-        
+        draining = true;
+        life--;
+        yield return new WaitForSeconds(lifeDrainDuration / maxLife);
+        draining = false;
     }
 }

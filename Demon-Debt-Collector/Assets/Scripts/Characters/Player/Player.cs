@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Lifeforce lifeforce;
 
+    public Lifeforce Life => lifeforce;
+
 
     private void Start()
     {
@@ -16,7 +18,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        //move
         movement.Move(input.Move, input.IsSprinting);
+
+        //drain life
+        if (!lifeforce.Draining) StartCoroutine(lifeforce.DrainLife());
     }
 
     #region Unity new input system (OnEnable/OnDisable)

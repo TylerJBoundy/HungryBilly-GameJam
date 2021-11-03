@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField] private float interactRadius = 10f;
     [SerializeField] private float absorbDuration = 5f;
 
+    [Header("Debugging")]
+    public bool busy = false;
+
 
     private Player_Input input;
     public Player_Input Input => input;
@@ -30,7 +33,7 @@ public class Player : MonoBehaviour
         absorbLife = AbsorbLife.CreateComponent(gameObject, absorbDuration);
     }
 
-    public Enemy target;
+    
     private void FixedUpdate()
     {
         //move
@@ -40,8 +43,8 @@ public class Player : MonoBehaviour
         if (!lifeforce.Draining) StartCoroutine(lifeforce.DrainLife());
 
         //absorb from enemies
-        target = absorbLife.CheckSurroundings(interactRadius);
-        if (input.AbsorbingLife && target != null) absorbLife.StartAbsorb(target);
+        Enemy target = absorbLife.CheckSurroundings(interactRadius);
+        if (input.AbsorbingLife && target != null && busy == false) absorbLife.StartAbsorb(target);
     }
 
     #region Unity new input system (OnEnable/OnDisable)

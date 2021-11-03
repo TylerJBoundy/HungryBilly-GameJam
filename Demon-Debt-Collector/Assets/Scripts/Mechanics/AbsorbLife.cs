@@ -33,10 +33,10 @@ public class AbsorbLife : MonoBehaviour
     {
         if (enemy as Ghost != null)
             return EnemyTypes.GHOST;
-        else
-        //if (enemy as WhickedPerson != null)
-        //    return EnemyTypes.WHICKED_PERSON;
+        else if (enemy as WhickedPerson != null)
             return EnemyTypes.WHICKED_PERSON;
+
+        return EnemyTypes.INVALID;
     }
 
     #region Absorbing Lifeforce
@@ -46,6 +46,7 @@ public class AbsorbLife : MonoBehaviour
     /// <param name="target">The target to absorb.</param>
     public void StartAbsorb(Enemy target)
     {
+        player.busy = true;
         absorbScore = 0;
         player.Movement.canMove = false;
         ControlEnemyMovement(target);
@@ -64,18 +65,22 @@ public class AbsorbLife : MonoBehaviour
             yield break;
         }
 
-        target.GetComponent<Animator>().SetBool("Draining", true);
-
-        yield return new WaitForSeconds(absorbDuration / requiredScore);
-        if (absorbScore == requiredScore)
+        if (absorbScore == 0)
+        {
+            Animator animator = target.GetComponent<Animator>();
+            animator.SetBool("Draining", true);
+            animator.PlayInFixedTime("Drain", 1, absorbDuration);
+        }
+        else if (absorbScore == requiredScore)
         {
             EndAbsorb(target, true);
+            yield break;
         }
-        else
-        {
-            absorbScore++;
-            StartCoroutine(Absorb(target));
-        }
+
+        yield return new WaitForSeconds(absorbDuration / requiredScore);
+
+        absorbScore++;
+        StartCoroutine(Absorb(target));
     }
 
     /// <summary>
@@ -88,13 +93,15 @@ public class AbsorbLife : MonoBehaviour
         if (successful)
         {
             target.Dead();
-            player.Life.AddLife(target.Reward);
-        } else
+        }
+        else
         {
             target.GetComponent<Animator>().SetBool("Draining", false);
+            ControlEnemyMovement(target, true);
         }
-        ControlEnemyMovement(target, true);
+
         player.Movement.canMove = true;
+        player.busy = false;
     }
     #endregion
 
@@ -110,13 +117,15 @@ public class AbsorbLife : MonoBehaviour
     {
         switch (CheckEnemyType(target))
         {
+            case EnemyTypes.INVALID:
+                Debug.Log("that's weird....");
+                break;
             case EnemyTypes.GHOST:
                 Ghost ghost = target as Ghost;
                 ghost.Movement.canMove = thaw;
                 break;
             case EnemyTypes.WHICKED_PERSON:
-                Debug.Log("huh..");
-                //WhickedPerson wp = target as WhickedPerson;
+                WhickedPerson wp = target as WhickedPerson;
                 //wp.Movement.canMove = thaw;
                 break;
         }

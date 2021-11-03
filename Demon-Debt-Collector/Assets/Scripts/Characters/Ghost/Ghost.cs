@@ -2,12 +2,18 @@ using UnityEngine;
 
 public class Ghost : Enemy
 {
-    [SerializeField] private Ghost_Move movement;
+    #region AI
+    [Header("Movement Variables")]
+    [SerializeField] protected float startingSpeed = 1f; //Speed to start with
+    [SerializeField] private Ghost_Move movement; //Movement module for the character
+    [SerializeField] private Vector2[] destinations; //used to control the AI movement
+
     public Ghost_Move Movement => movement;
 
-    [SerializeField] private Vector2[] destinations;
-
+    //used as a reference for which destination is currently active for the AI
     private int targetIndex = 0;
+
+    public void SetDestinations(Vector2[] destinations) => this.destinations = destinations;
 
     private void Start()
     {
@@ -31,5 +37,12 @@ public class Ghost : Enemy
             if ((Vector2)transform.position == destinations[targetIndex]) GetNewTarget(); //Check if the AI has arrived.
             movement.Move(destinations[targetIndex]); //Move towards the destination.
         }
+    }
+    #endregion
+
+    public override void Dead()
+    {
+        gm.GhostDrained(reward);
+        base.Dead();
     }
 }

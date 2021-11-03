@@ -19,13 +19,15 @@ public class UI_Lifeforce : MonoBehaviour
     /// <param name="maxHealth">The max lifeforce of the player.</param>
     private void UpdateVisuals(int health, int maxHealth)
     {
-        float startValue = lifeBar.fillAmount;
+        //float startValue = lifeBar.fillAmount;
 
-        float timer = 0f;
-        timer += Time.deltaTime;
+        //float timer = 0f;
+        //timer += Time.deltaTime;
 
-        float displayValue = Mathf.Lerp(startValue, (float)health / maxHealth, timer);
-        lifeBar.fillAmount = displayValue;
+        //float displayValue = Mathf.Lerp(startValue, (float)health / maxHealth, timer);
+        //lifeBar.fillAmount = displayValue;
+
+        lifeBar.fillAmount = (float)health / maxHealth;
 
         lifeAmount.text = health.ToString();
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameMaster : MonoBehaviour
 {
@@ -29,7 +30,14 @@ public class GameMaster : MonoBehaviour
     [Space]
     [SerializeField] private float ghostMaxWanderDistance = 1f;
 
-    public void AddScore(int amount) => score += amount;
+    [Header("Events")]
+    public UnityEvent OnScoreUpdated;
+
+    public void AddScore(int amount)
+    {
+        score += amount;
+        OnScoreUpdated?.Invoke();
+    }
 
     private void Awake()
     {

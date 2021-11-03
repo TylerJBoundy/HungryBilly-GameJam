@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [System.Serializable]
 public class Lifeforce
@@ -17,6 +18,8 @@ public class Lifeforce
 
     private bool draining = false;
     public bool Draining => draining;
+
+    public UnityEvent OnDied;
 
     /// <summary>
     /// Handles the draining of life.
@@ -46,11 +49,13 @@ public class Lifeforce
     /// <param name="amount">The amount to remove.</param>
     public void RemoveLife(int amount)
     {
+        if (life <= 0) return; //This prevents the player from dying after already having been dead.
+
         life -= amount;
 
-        if (life <= 0)
+        if (life <= 0) //This controls the player dying.
         {
-            Debug.Log("dead");
+            OnDied?.Invoke();
             life = 0;
         }
     }

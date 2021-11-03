@@ -50,7 +50,7 @@ public abstract class Character_Move
         }
 
         //Moving the Character
-        movement = new Vector2(movementDirection.x, movementDirection.y) * Time.fixedDeltaTime * speed;
+        movement = new Vector2(movementDirection.x, movementDirection.y) * Time.deltaTime * speed;
         rigidbody.transform.Translate(movement, Space.World);
     }
     #endregion

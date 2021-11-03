@@ -7,7 +7,7 @@ public abstract class Character_Move
 
     [Header("Movement Variables")]
     [SerializeField] public float movementSpeed;
-    [SerializeField] protected float PERCENTAGE_INCREASE_WHEN_SPRINTING = 10f;
+    [SerializeField] protected float PERCENTAGE_INCREASE_WHEN_SPRINTING = 25f;
 
     protected Rigidbody2D rigidbody;
     protected SpriteRenderer spriteRenderer;

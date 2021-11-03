@@ -80,6 +80,17 @@ public class GameMaster : MonoBehaviour
     #endregion
     #region Spawners
     /// <summary>
+    /// Used to reset all transform except position.
+    /// </summary>
+    /// <param name="transf"></param>
+    private void SetTransform(Enemy transf)
+    {
+        transf.transform.position = new Vector3(transf.transform.position.x, transf.transform.position.y, 0);
+        transf.transform.rotation = new Quaternion(0, 0, 0, 0);
+        transf.transform.localScale = new Vector3(2, 2, 2);
+    }
+
+    /// <summary>
     /// Spawn a Ghost at a random ghost spawn point.
     /// Randomly adds 2-5 destinations for the ghost with a 1f distance from their spawn on x+- and y+-.
     /// </summary>
@@ -87,9 +98,11 @@ public class GameMaster : MonoBehaviour
     {
         if (ghostsAvailable >= maxGhosts) return;
 
-        Transform spawnpoint = ghostSpawnpoints[Random.Range(0, ghostSpawnpoints.Length - 1)]; //set the spawnpoint to a random one in the list
+        Transform spawnpoint = ghostSpawnpoints[Random.Range(0, ghostSpawnpoints.Length - 1)]; //set the spawnpoint to a random one in the list.
         Ghost ghost = Instantiate(ghostPrefab, spawnpoint).GetComponent<Ghost>(); //instantiate a ghost at spawnpoint.
         ghost.transform.SetParent(enemyDump); //puts the ghost in the enemydump gameobject
+
+        SetTransform(ghost);
 
         List<Vector2> destinations = new List<Vector2>(); //adds random destinations for the ghost movement AI.
         for (int i = 0; i < Random.Range(2, 5); i++)
@@ -119,9 +132,10 @@ public class GameMaster : MonoBehaviour
     {
         if (peopleAvailable >= maxPeople) return;
 
-        Transform spawnpoint = peopleSpawnpoints[Random.Range(0, peopleSpawnpoints.Length - 1)];
-        WhickedPerson person = Instantiate(personPrefab, spawnpoint).GetComponent<WhickedPerson>();
+        Transform spawnpoint = peopleSpawnpoints[Random.Range(0, peopleSpawnpoints.Length - 1)]; //set the spawnpoint to a random one in the list.
+        WhickedPerson person = Instantiate(personPrefab, spawnpoint).GetComponent<WhickedPerson>(); //instantiate at spawnpoint
         person.transform.SetParent(enemyDump);
+        SetTransform(person);
 
         peopleAvailable++;
     }

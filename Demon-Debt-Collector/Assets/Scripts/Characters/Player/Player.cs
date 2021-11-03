@@ -62,7 +62,6 @@ public class Player : MonoBehaviour
     }
 
     #region Unity new input system (OnEnable/OnDisable)
-    private void OnEnable() => input.OnEnable();
     private void OnDisable() => input.OnDisable();
     #endregion
 }

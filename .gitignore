@@ -43,3 +43,8 @@ sysinfo.txt
 # End of https://www.gitignore.io/api/unity
 Logs/
 bin/
+hooks/post-checkout
+hooks/post-commit
+hooks/post-merge
+hooks/pre-push
+lfs/objects/a8/f2/a8f2fc2840110c8f1e0eb80350e24737245a058cf73bf9f5d209e12aebbd4f9d
